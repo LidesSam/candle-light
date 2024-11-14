@@ -1,9 +1,9 @@
-extends KinematicBody
+extends CharacterBody3D
 
 
-export var speed = 100
-export var jump_strenght = 50
-export var gravity = 50
+@export var speed = 100
+@export var jump_strenght = 50
+@export var gravity = 50
 
 var vel = Vector3.ZERO
 var c_acel =0
@@ -15,7 +15,7 @@ var snap_vector = Vector3.DOWN
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-onready var anims= $AnimationPlayer
+@onready var anims= $AnimationPlayer
 var grounded = false
 
 var speedCap = 10
@@ -71,8 +71,8 @@ func _physics_process(delta):
 	injump = is_on_floor() and Input.is_action_just_pressed("ui_back")
 	
 	
-	$Camera/Control/floorAngle.text = str("angle:",get_floor_angle())
-	$Camera/Control/floorNormal.text = str("normal:",get_floor_normal())
+	$Camera3D/Control/floorAngle.text = str("angle:",get_floor_angle())
+	$Camera3D/Control/floorNormal.text = str("normal:",get_floor_normal())
 		
 	if(injump):
 		vel.y = jump_strenght
@@ -81,9 +81,15 @@ func _physics_process(delta):
 		snap_vector =Vector3.DOWN
 		
 		pass
-	var rcast =$RayCast.cast_to
+	var rcast =$RayCast3D.target_position
 
-	move_and_slide_with_snap(vel, snap_vector,Vector3.UP,true,4,deg2rad(45))
+	set_velocity(vel)
+	# TODOConverter3To4 looks that snap in Godot 4 is float, not vector like in Godot 3 - previous value `snap_vector`
+	set_up_direction(Vector3.UP)
+	set_floor_stop_on_slope_enabled(true)
+	set_max_slides(4)
+	set_floor_max_angle(deg_to_rad(45))
+	move_and_slide()
 #	used abs(c_acel) to consider negative values
 	
 #	rotation =  cross_product(get_floor_normal(),cross_product(rotation,rcast))
@@ -97,7 +103,7 @@ func _physics_process(delta):
 			$AnimationPlayer.play("sliding")
 	else:
 		$AnimationPlayer.play("idle")
-	$Camera/Control/accel.text=str("accel:",c_acel)
+	$Camera3D/Control/accel.text=str("accel:",c_acel)
 
 
 
@@ -126,7 +132,7 @@ func pick_up(collectType="",points =1):
 
 #update sparks counters
 func update_sparks():
-	$Camera/Gui/sparks/count.text = str(sparks)
+	$Camera3D/Gui/sparks/count.text = str(sparks)
 	
 #aply accel in a direction
 #warnig

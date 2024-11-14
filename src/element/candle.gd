@@ -1,10 +1,10 @@
-extends RigidBody
+extends RigidBody3D
 
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-onready var light = $Light
+@onready var light = $Light3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 
 # Declare member variables here. Examples:
@@ -17,5 +17,5 @@ func _ready():
 
 
 func _on_Area_body_entered(body):
-	$OmniLight.light_color = "#ffff00"
+	$OmniLight3D.light_color = "#ffff00"
 	pass # Replace with function body.
