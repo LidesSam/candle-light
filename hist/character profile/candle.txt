@@ -1,0 +1,2 @@
+Ember
+A candle sprite that venture to [Machine]
