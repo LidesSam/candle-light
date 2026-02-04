@@ -3,9 +3,10 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d08kswageujao"
-path="res://.godot/imported/world-v2_New Piskel.png-438901e4cd6a4457bc97d2ac0287bbad.ctex"
+path.s3tc="res://.godot/imported/world-v2_New Piskel.png-438901e4cd6a4457bc97d2ac0287bbad.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "b0b76082de5918e92c97d0ae0e7834f3"
@@ -14,11 +15,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/world-v2_New Piskel.png"
-dest_files=["res://.godot/imported/world-v2_New Piskel.png-438901e4cd6a4457bc97d2ac0287bbad.ctex"]
+dest_files=["res://.godot/imported/world-v2_New Piskel.png-438901e4cd6a4457bc97d2ac0287bbad.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
@@ -34,4 +35,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

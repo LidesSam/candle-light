@@ -9,13 +9,8 @@ var vel = Vector3.ZERO
 var c_acel =0
 
 var snap_vector = Vector3.DOWN
-
+@onready var animPlayer:AnimationPlayer=$"proto1-candle7a/AnimationPlayer"
 	
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-@onready var anims= $AnimationPlayer
 var grounded = false
 
 var speedCap = 10
@@ -28,7 +23,7 @@ var injump=false
 var sparks =0
 func _ready():
 	c_acel=0
-	$AnimationPlayer.play("idle")
+	animPlayer.play("idle")
 #	print($RayCast.cast_to)
 #	cross_product($RayCast.cast_to,rotation)
 	pass # Replace with function body.
@@ -95,14 +90,14 @@ func _physics_process(delta):
 #	rotation =  cross_product(get_floor_normal(),cross_product(rotation,rcast))
 	
 	if(not is_on_floor()):
-		$AnimationPlayer.play("on air")
+		animPlayer.play("on air")
 	elif(abs(c_acel)>5):
 		if (abs(c_acel)>25):
-			$AnimationPlayer.play("sliding",-1,2.0)
+			animPlayer.play("sliding",-1,2.0)
 		else:
-			$AnimationPlayer.play("sliding")
+			animPlayer.play("sliding")
 	else:
-		$AnimationPlayer.play("idle")
+		animPlayer.play("idle")
 	$Camera3D/Control/accel.text=str("accel:",c_acel)
 
 
