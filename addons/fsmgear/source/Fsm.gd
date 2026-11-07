@@ -23,13 +23,12 @@ func set_debug_on(targetForStateText):
 	fsmDebug = true
 	uptateTextTarget = true
 	textTarget = targetForStateText
-	
 
-func set_owner(Owner,targetText=null):
+func set_actowner(Owner,targetText=null):
 	print("setting owner")
 	actowner=Owner
 	if(targetText):
-		textTarget =targetText
+		textTarget = targetText
 		uptateTextTarget =true
 	pass
 
@@ -41,13 +40,13 @@ func clear_states():
 	
 func autoload(Owner):
 	#print(actowner.name)
-	self.set_owner(Owner,null)
+	self.set_actowner(Owner,null)
 	#print(actowner.name)
 	for st in get_children():
 		print("adding state:",st.name)
-		addState(st.name,st)
+		add_state(st.name,st)
 	
-func addStateTransition(enterStateName,exitStateName,funcName:Callable):
+func add_state_transition(enterStateName,exitStateName,funcName:Callable):
 	
 	if(statesNames.find(enterStateName)!=-1):
 		if(statesNames.find(exitStateName)!=-1):
@@ -62,28 +61,28 @@ func addStateTransition(enterStateName,exitStateName,funcName:Callable):
 	else:
 		print("not find enter state:",enterStateName)
 	
-func addGlobalTransition(stateName,funcName:Callable):
+func add_global_transition(stateName,funcName:Callable):
 	globalToStates.push_back(stateName)
 	var condRef = funcName
 	globalContiditions.push_back(condRef)
 	
-func addState(state_name, st):
+func add_state(state_name, st):
 #	create state and past this as parent
-	st.setFsmParent(self)
-	st.StateName= state_name
+	st.set_fsm_parent(self)
+	st.StateName= str(state_name)
 	states.push_back(st)
 	statesNames.push_back(st.StateName)
 
 	
-func startState():
+func start_fsm():
 	currentStateAsignedName=statesNames[0]
 	currentState = states[0]
 	currentState.enter(actowner)
 
-func getCurrentStateName():
+func get_current_state_name():
 	return currentStateAsignedName
 	
-func fsmUpdate(delta):
+func fsm_update(delta):
 	
 	currentState.update(actowner,delta)
 	#check for global tarnstion
@@ -93,19 +92,16 @@ func fsmUpdate(delta):
 				change_to_state(globalToStates[i])
 				break
 	#get the transitions state to the current state
-	
 	for t in currentState.transitions:
 		#check an trigger one by one.
-		if(t.checkCondition(self)):
+		if(t.check_condition(self)):
 			break
 		
-		
-		
 	if(textTarget and uptateTextTarget):
-			textTarget.text= getCurrentStateName()
+			textTarget.text= get_current_state_name()
 
 func handleInput(event):
-	currentState.handleInput(actowner,event)
+	currentState.handle_input(actowner,event)
 
 #change state
 func change_state(nextState):
@@ -120,6 +116,7 @@ func change_state_by_index(idx):
 
 #change to the state by name
 func change_to_state(state_name):
+	print()
 	if(currentStateAsignedName!=state_name):
 		var idx =0
 		for st in statesNames:
@@ -130,3 +127,6 @@ func change_to_state(state_name):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+func get_all_states():
+	return get_children()

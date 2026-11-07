@@ -1,15 +1,61 @@
-[gd_scene format=3 uid="uid://b7nlvjs7f3bi1"]
+[gd_scene format=3 uid="uid://b0p3ypl8s2hjx"]
 
-[node name="VBoxContainer" type="VBoxContainer"]
+[ext_resource type="Script" uid="uid://db1yutygpysf7" path="res://addons/fsmgear/fsm_editor.gd" id="1_cthlx"]
+
+[node name="fsmEditor" type="Control" unique_id=159514602]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_cthlx")
+metadata/_edit_use_anchors_ = true
 
-[node name="fsm gear" type="Label" parent="."]
-offset_right = 320.0
-offset_bottom = 14.0
-text = "FSM GEAR v1.0"
+[node name="sidebar" type="VBoxContainer" parent="." unique_id=214928118]
+custom_minimum_size = Vector2(256, 128)
+layout_mode = 0
+anchor_right = 0.22222222
+anchor_bottom = 1.0
+metadata/_edit_use_anchors_ = true
 
-[node name="Control" type="VBoxContainer" parent="."]
-offset_top = 18.0
-offset_right = 320.0
-offset_bottom = 18.0
+[node name="Owner" type="Label" parent="sidebar" unique_id=366002039]
+layout_mode = 2
+
+[node name="TargetLbl" type="Label" parent="sidebar" unique_id=1292160684]
+layout_mode = 2
+text = "unstart"
+
+[node name="newStateNameEditLine" type="LineEdit" parent="sidebar" unique_id=1270529748]
+layout_mode = 2
+
+[node name="add" type="Button" parent="sidebar" unique_id=638141601]
+layout_mode = 2
+text = "+"
+
+[node name="HR" type="ColorRect" parent="sidebar" unique_id=1766919215]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="sidebar" unique_id=1573206295]
+layout_mode = 2
+text = "States"
+
+[node name="HR2" type="ColorRect" parent="sidebar" unique_id=1433060018]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
+[node name="fsmStates" type="VBoxContainer" parent="sidebar" unique_id=224367048]
+layout_mode = 2
+
+[node name="GraphEdit" type="GraphEdit" parent="." unique_id=2076645945]
+layout_mode = 0
+anchor_left = 0.22569445
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="sidebar/add" to="." method="_on_add_pressed"]

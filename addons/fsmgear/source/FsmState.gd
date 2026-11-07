@@ -17,11 +17,11 @@ var exitaction=null
 func _ready():
 	pass
 
-func setFsmParent(fsm):
+func set_fsm_parent(fsm):
 	parentFsm=fsm
 
 func enter(actowner):
-	UpdateOwnerStateDisplay(actowner)
+	update_owner_state_display(actowner)
 	print(actowner.name," enterState:",StateName)
 	
 	if(enteraction):
@@ -32,7 +32,7 @@ func enter(actowner):
 func update(actowner,delta):
 	pass
 
-func handleInput(actowner,event):
+func handle_input(actowner,event):
 	pass
 
 func exit(actowner):
@@ -44,14 +44,15 @@ func set_exitaction(callback:Callable):
 	print("Setting exit action")
 	exitaction=callback
 	print(exitaction);
+	
 func set_enteraction(callback:Callable):
 	print("Setting enter action")
 	enteraction=callback
 	print(exitaction);
 	
-func UpdateOwnerStateDisplay(actowner):
-	if actowner.has_method("updateStateName"):
-		actowner.updateStateName(StateName)
+func update_owner_state_display(actowner):
+	if actowner.has_method("update_state_name"):
+		actowner.update_state_name(StateName)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
