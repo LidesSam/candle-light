@@ -1,9 +1,9 @@
 extends CharacterBody3D
 
-@export var speed = 100
-@export var speedLimit = 10
-@export var jumpStrenght = 50
-@export var gravity = 50
+@export var speed:float = 100
+@export var speedLimit:float = 10
+@export var jumpStrenght:float = 50
+@export var gravity:float = 50
 
 var vel = Vector3.ZERO
 var c_acel =0
@@ -25,14 +25,27 @@ var injump = false
 #charge collectible mode to item bag item
 var sparks =0
 
+
+@onready var fsm =$Fsm
 func _ready():
+	gravity=50
 	c_acel=0
 	animPlayer.play("idle")
+	fsm.autoload(self)
+	fsm.add_state_transition("idle","jump",is_jumping)
+	fsm.add_state_transition("idle","fall",is_falling)
+	fsm.add_state_transition("jump","fall",is_falling)
+	fsm.add_state_transition("fall","idle",on_ground)
+	fsm.start_fsm()
+	fsm.set_debug_on($Camera3D/Gui/debug)
 
 func _input(event):
-	pass
+	fsm.handleInput(self)
 	
 func _physics_process(delta):
+	fsm.fsm_update(delta)
+	
+func basic_physics(delta):
 	if($boostTime.is_stopped()):
 		var foward_force=0
 		foward_force	= Input.get_action_strength("ui_up")*10
@@ -58,6 +71,8 @@ func _physics_process(delta):
 	var aux= get_transform().basis.z
 	vel.x = aux.x*c_acel
 	vel.z = aux.z*c_acel
+	print(vel.y)
+	print(gravity)
 	if(vel.y>=-gravity):
 		vel.y -= gravity*delta+aux.y*c_acel
 	else:
@@ -75,8 +90,9 @@ func _physics_process(delta):
 		snap_vector =Vector3.ZERO
 	elif justLanded:
 		snap_vector =Vector3.DOWN
-	var rcast =$groundSensor.target_position
-
+	var rcast =groundSensor.target_position
+	if groundSensor.get_collider():
+		grounded=true
 	set_velocity(vel)
 	# TODO
 	#Converter3To4 looks that snap in Godot 4 is float, 
@@ -143,7 +159,17 @@ func boost(dir = Vector3.ZERO):
 func rebound(bounce=1):
 	if(c_acel>=0):
 		c_acel=-c_acel*bounce
+#conditions
 
-
+func on_ground():
+	return grounded
+	
+func next_to_cliff():
+	return grounded and !slopeClifSensor.get_collider()
+func is_jumping():
+	return injump
+func is_falling():
+	return velocity.z>0
+#callbacks
 func _on_boostTime_timeout():
 	$boostTime.stop()

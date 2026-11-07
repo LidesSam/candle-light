@@ -19,6 +19,10 @@ run/main_scene="res://src/TestRoom.tscn"
 config/features=PackedStringArray("4.6")
 config/icon="res://icon.png"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/fsmgear/plugin.cfg")
+
 [input]
 
 ui_back={

@@ -1,8 +1,13 @@
 [gd_scene format=4 uid="uid://yoxurqxfvna6"]
 
+[ext_resource type="Script" uid="uid://bkd7u3ab7fqp8" path="res://addons/fsmgear/source/Fsm.gd" id="2_8v7pc"]
 [ext_resource type="PackedScene" uid="uid://bekaam3vpsx1n" path="res://assets/models/candle-girl/proto1-candle7a.glb" id="2_uokfi"]
+[ext_resource type="Script" uid="uid://ch06opegjokr5" path="res://src/element/playerStates/candle-idle-state.gd" id="3_1gjsg"]
 [ext_resource type="Texture2D" uid="uid://cu4fhh5qb3ob8" path="res://assets/models/world-v3_New Piskel.png" id="3_feg7l"]
+[ext_resource type="Script" uid="uid://brf2lfa11c3be" path="res://addons/fsmgear/source/FsmState.gd" id="3_j82xv"]
+[ext_resource type="Script" uid="uid://ber2o35tvibh6" path="res://src/element/playerStates/candle-jump-state.gd" id="5_0uly8"]
 [ext_resource type="Script" uid="uid://c5stjmluwcjy3" path="res://src/element/player.gd" id="6"]
+[ext_resource type="Script" uid="uid://cdpcvqkxafeqc" path="res://src/element/playerStates/candle-fall-state.gd" id="6_lw4is"]
 [ext_resource type="Texture2D" uid="uid://dau0vekhxp6x8" path="res://icon.png" id="7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1v176"]
@@ -125,6 +130,42 @@ height = 7.0
 
 [node name="proto" type="CharacterBody3D" unique_id=1686967618]
 script = ExtResource("6")
+speed = null
+speedLimit = null
+jumpStrenght = null
+gravity = null
+
+[node name="Fsm" type="Node" parent="." unique_id=1498701854]
+script = ExtResource("2_8v7pc")
+metadata/_custom_type_script = "uid://bkd7u3ab7fqp8"
+
+[node name="idle" type="Node" parent="Fsm" unique_id=2002533201]
+script = ExtResource("3_1gjsg")
+metadata/_custom_type_script = "uid://brf2lfa11c3be"
+
+[node name="run" type="Node" parent="Fsm" unique_id=1566725866]
+script = ExtResource("3_j82xv")
+metadata/_custom_type_script = "uid://brf2lfa11c3be"
+
+[node name="boost" type="Node" parent="Fsm" unique_id=120592397]
+script = ExtResource("3_j82xv")
+metadata/_custom_type_script = "uid://brf2lfa11c3be"
+
+[node name="jump" type="Node" parent="Fsm" unique_id=1354227793]
+script = ExtResource("5_0uly8")
+metadata/_custom_type_script = "uid://brf2lfa11c3be"
+
+[node name="fall" type="Node" parent="Fsm" unique_id=366967209]
+script = ExtResource("6_lw4is")
+metadata/_custom_type_script = "uid://brf2lfa11c3be"
+
+[node name="hurt" type="Node" parent="Fsm" unique_id=130416216]
+script = ExtResource("3_j82xv")
+metadata/_custom_type_script = "uid://brf2lfa11c3be"
+
+[node name="death" type="Node" parent="Fsm" unique_id=1513698027]
+script = ExtResource("3_j82xv")
+metadata/_custom_type_script = "uid://brf2lfa11c3be"
 
 [node name="proto1-candle7a" parent="." unique_id=1654818748 instance=ExtResource("2_uokfi")]
 
@@ -218,6 +259,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="debug" type="Label" parent="Camera3D/Gui" unique_id=783477607]
+layout_mode = 0
+offset_left = 472.0
+offset_right = 668.0
+offset_bottom = 70.0
 
 [node name="sparks" type="HBoxContainer" parent="Camera3D/Gui" unique_id=1102478734]
 layout_mode = 0

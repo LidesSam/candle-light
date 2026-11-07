@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1n3knk2xvy64"]
+[gd_scene format=3 uid="uid://b1n3knk2xvy64"]
 
 [ext_resource type="MeshLibrary" uid="uid://dwbnatx46c7m5" path="res://assets/test/worldv3.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://yoxurqxfvna6" path="res://src/element/testcandle.tscn" id="2"]
@@ -20,9 +20,9 @@ rings = 4
 [sub_resource type="SphereShape3D" id="SphereShape3D_fnrno"]
 radius = 4.6
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=431544055]
 
-[node name="GridMap" type="GridMap" parent="."]
+[node name="GridMap" type="GridMap" parent="." unique_id=1690320473]
 mesh_library = ExtResource("1")
 cell_size = Vector3(10, 10, 10)
 data = {
@@ -30,71 +30,75 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 2, 0)
 
-[node name="candle" parent="." instance=ExtResource("3")]
+[node name="candle" parent="." unique_id=1183148972 instance=ExtResource("3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0088, 6.40021, -16.2399)
 
-[node name="player" parent="." instance=ExtResource("2")]
+[node name="player" parent="." unique_id=384126727 instance=ExtResource("2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.0802, 16.0987, -56.1364)
+speed = 100.0
+speedLimit = 10.0
+jumpStrenght = 50.0
+gravity = 50.0
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1095392834]
 transform = Transform3D(0.115492, -0.79957, 0.589364, -0.993308, -0.0929658, 0.0685253, 1.84725e-08, -0.593334, -0.804956, 0, 15.0619, 0)
 light_specular = 0.0
 sky_mode = 1
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Node3D" type="Node3D" parent="." unique_id=1494199687]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.1, 8.7, 16.8)
 
-[node name="Node3D" parent="Node3D" instance=ExtResource("4")]
+[node name="Node3D" parent="Node3D" unique_id=816460728 instance=ExtResource("4")]
 
-[node name="Spatial2" parent="Node3D" instance=ExtResource("4")]
+[node name="Spatial2" parent="Node3D" unique_id=1968100329 instance=ExtResource("4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
 
-[node name="Spatial3" parent="Node3D" instance=ExtResource("4")]
+[node name="Spatial3" parent="Node3D" unique_id=461251566 instance=ExtResource("4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 
-[node name="Spatial4" parent="Node3D" instance=ExtResource("4")]
+[node name="Spatial4" parent="Node3D" unique_id=474821169 instance=ExtResource("4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 10)
 
-[node name="Spatial3" type="Node3D" parent="."]
+[node name="Spatial3" type="Node3D" parent="." unique_id=1494261213]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 10, 30)
 
-[node name="Node3D" parent="Spatial3" instance=ExtResource("4")]
+[node name="Node3D" parent="Spatial3" unique_id=683792851 instance=ExtResource("4")]
 
-[node name="Spatial2" parent="Spatial3" instance=ExtResource("4")]
+[node name="Spatial2" parent="Spatial3" unique_id=1057709923 instance=ExtResource("4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
 
-[node name="Spatial3" parent="Spatial3" instance=ExtResource("4")]
+[node name="Spatial3" parent="Spatial3" unique_id=163254966 instance=ExtResource("4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 
-[node name="Spatial4" parent="Spatial3" instance=ExtResource("4")]
+[node name="Spatial4" parent="Spatial3" unique_id=487051838 instance=ExtResource("4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 10)
 
-[node name="Spatial4" type="Node3D" parent="."]
+[node name="Spatial4" type="Node3D" parent="." unique_id=551719465]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 20, 30)
 
-[node name="Node3D" parent="Spatial4" instance=ExtResource("4")]
+[node name="Node3D" parent="Spatial4" unique_id=1399817196 instance=ExtResource("4")]
 
-[node name="Spatial2" parent="Spatial4" instance=ExtResource("4")]
+[node name="Spatial2" parent="Spatial4" unique_id=1252902915 instance=ExtResource("4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
 
-[node name="Spatial3" parent="Spatial4" instance=ExtResource("4")]
+[node name="Spatial3" parent="Spatial4" unique_id=1479392886 instance=ExtResource("4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 
-[node name="Spatial4" parent="Spatial4" instance=ExtResource("4")]
+[node name="Spatial4" parent="Spatial4" unique_id=354245351 instance=ExtResource("4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 10)
 
-[node name="Spatial2" type="Node3D" parent="."]
+[node name="Spatial2" type="Node3D" parent="." unique_id=1435337959]
 
-[node name="Node3D" parent="Spatial2" instance=ExtResource("4")]
+[node name="Node3D" parent="Spatial2" unique_id=963785713 instance=ExtResource("4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.2307, 10.3716, -5.85872)
 
-[node name="Spatial2" parent="Spatial2" instance=ExtResource("4")]
+[node name="Spatial2" parent="Spatial2" unique_id=1742950091 instance=ExtResource("4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.16532, 10.3716, -5.85872)
 
-[node name="Spatial3" parent="Spatial2" instance=ExtResource("4")]
+[node name="Spatial3" parent="Spatial2" unique_id=1902550308 instance=ExtResource("4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.73061, 10.3716, -5.85872)
 
-[node name="bumper" type="RigidBody3D" parent="."]
+[node name="bumper" type="RigidBody3D" parent="." unique_id=431748469]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -50)
 axis_lock_linear_x = true
 axis_lock_linear_y = true
@@ -102,24 +106,24 @@ axis_lock_linear_z = true
 gravity_scale = 0.0
 script = ExtResource("5")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="bumper"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="bumper" unique_id=1547331539]
 shape = SubResource("1")
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="bumper"]
+[node name="CSGMesh3D" type="CSGMesh3D" parent="bumper" unique_id=1437916442]
 mesh = SubResource("2")
 
-[node name="Area3D" type="Area3D" parent="bumper"]
+[node name="Area3D" type="Area3D" parent="bumper" unique_id=1877189905]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="bumper/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="bumper/Area3D" unique_id=1822723816]
 shape = SubResource("SphereShape3D_fnrno")
 
-[node name="road-ring" parent="." instance=ExtResource("6")]
+[node name="road-ring" parent="." unique_id=1222137744 instance=ExtResource("6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.56409, 9.35545, 11.2511)
 
-[node name="road-ring2" parent="." instance=ExtResource("6")]
+[node name="road-ring2" parent="." unique_id=1011519544 instance=ExtResource("6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.56409, 9.35545, 11.2511)
 
-[node name="boost-ring" parent="." instance=ExtResource("7")]
+[node name="boost-ring" parent="." unique_id=1033890405 instance=ExtResource("7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.85415, 9.56889, 27.8719)
 
 [connection signal="body_entered" from="bumper" to="bumper" method="_on_bumper_body_entered"]
