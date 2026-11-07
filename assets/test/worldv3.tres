@@ -1,4 +1,4 @@
-[gd_resource type="MeshLibrary" load_steps=56 format=4 uid="uid://dwbnatx46c7m5"]
+[gd_resource type="MeshLibrary" format=4 uid="uid://dwbnatx46c7m5"]
 
 [ext_resource type="Material" path="res://assets/models/Material_001.material" id="1"]
 [ext_resource type="Material" path="res://assets/models/Material.material" id="2"]

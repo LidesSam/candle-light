@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://yoxurqxfvna6"]
+[gd_scene format=4 uid="uid://yoxurqxfvna6"]
 
 [ext_resource type="PackedScene" uid="uid://bekaam3vpsx1n" path="res://assets/models/candle-girl/proto1-candle7a.glb" id="2_uokfi"]
 [ext_resource type="Texture2D" uid="uid://cu4fhh5qb3ob8" path="res://assets/models/world-v3_New Piskel.png" id="3_feg7l"]
@@ -120,22 +120,13 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="CapsuleShape3D" id="9"]
-radius = 1.25317
-height = 8.69245
+radius = 1.0
+height = 7.0
 
-[sub_resource type="BoxShape3D" id="11"]
-
-[sub_resource type="SphereShape3D" id="10"]
-
-[node name="proto" type="CharacterBody3D"]
+[node name="proto" type="CharacterBody3D" unique_id=1686967618]
 script = ExtResource("6")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
-
-[node name="slopeDet" type="RayCast3D" parent="."]
-target_position = Vector3(0, 0, 1)
-
-[node name="proto1-candle7a" parent="." instance=ExtResource("2_uokfi")]
+[node name="proto1-candle7a" parent="." unique_id=1654818748 instance=ExtResource("2_uokfi")]
 
 [node name="Skeleton3D" parent="proto1-candle7a/metarig" index="0"]
 bones/0/rotation = Quaternion(0.12582, 0, 0, 0.992053)
@@ -211,19 +202,16 @@ bones/71/rotation = Quaternion(-1.8698e-07, 0.884842, -0.465891, -2.77766e-07)
 [node name="Cube" parent="proto1-candle7a/metarig/Skeleton3D" index="0"]
 mesh = SubResource("ArrayMesh_0uly8")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 4.09388, 0)
+[node name="bodyShape" type="CollisionShape3D" parent="." unique_id=215376778]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 3.618441, -4.1564213e-08)
 shape = SubResource("9")
 
-[node name="CollisionShape2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.116165, 7.79388, 2.1766)
-shape = SubResource("11")
-
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=896429192]
 transform = Transform3D(-1, -4.37114e-08, 7.57104e-08, 7.779e-09, 0.818099, 0.575077, -8.7076e-08, 0.575077, -0.818099, 0, 10, -10)
+visible = false
 far = 800.0
 
-[node name="Gui" type="Control" parent="Camera3D"]
+[node name="Gui" type="Control" parent="Camera3D" unique_id=1563178112]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -231,7 +219,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="sparks" type="HBoxContainer" parent="Camera3D/Gui"]
+[node name="sparks" type="HBoxContainer" parent="Camera3D/Gui" unique_id=1102478734]
 layout_mode = 0
 anchor_left = 1.0
 anchor_right = 1.0
@@ -239,12 +227,12 @@ offset_left = -182.0
 offset_right = -70.0
 offset_bottom = 64.0
 
-[node name="TextureRect" type="TextureRect" parent="Camera3D/Gui/sparks"]
+[node name="TextureRect" type="TextureRect" parent="Camera3D/Gui/sparks" unique_id=1383618777]
 layout_mode = 2
 texture = ExtResource("7")
 stretch_mode = 6
 
-[node name="count" type="Label" parent="Camera3D/Gui/sparks"]
+[node name="count" type="Label" parent="Camera3D/Gui/sparks" unique_id=1478578592]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -252,33 +240,41 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control" type="VBoxContainer" parent="Camera3D"]
+[node name="Control" type="VBoxContainer" parent="Camera3D" unique_id=1621057392]
 offset_right = 208.0
 offset_bottom = 136.0
 
-[node name="accel" type="Label" parent="Camera3D/Control"]
+[node name="accel" type="Label" parent="Camera3D/Control" unique_id=612837090]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
 
-[node name="floorAngle" type="Label" parent="Camera3D/Control"]
+[node name="floorAngle" type="Label" parent="Camera3D/Control" unique_id=1996869816]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
 
-[node name="floorNormal" type="Label" parent="Camera3D/Control"]
+[node name="floorNormal" type="Label" parent="Camera3D/Control" unique_id=1291006715]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
 
-[node name="SpringArm3D" type="SpringArm3D" parent="."]
-shape = SubResource("10")
-spring_length = 2.0
-
-[node name="boostTime" type="Timer" parent="."]
+[node name="boostTime" type="Timer" parent="." unique_id=201765556]
 wait_time = 0.2
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="slopeClifSensor" type="RayCast3D" parent="." unique_id=967769817]
+target_position = Vector3(0, -1, 1)
+debug_shape_custom_color = Color(0.7062508, 0.7045319, 0.018286604, 1)
+
+[node name="frontSensor" type="RayCast3D" parent="." unique_id=1213375840]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+target_position = Vector3(0, 0, 4)
+debug_shape_custom_color = Color(0.7126698, 0.0026933968, 0.9448457, 1)
+
+[node name="groundSensor" type="RayCast3D" parent="." unique_id=1153554979]
+debug_shape_custom_color = Color(0.9674749, 0.22267815, 0.99999994, 1)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1093180013]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.62279, -0.423495)
 light_color = Color(0.996574, 0.752853, 0.613043, 1)
 light_energy = 16.0

@@ -1,32 +1,33 @@
 extends CharacterBody3D
 
-
 @export var speed = 100
-@export var jump_strenght = 50
+@export var speedLimit = 10
+@export var jumpStrenght = 50
 @export var gravity = 50
 
 var vel = Vector3.ZERO
 var c_acel =0
-
 var snap_vector = Vector3.DOWN
-@onready var animPlayer:AnimationPlayer=$"proto1-candle7a/AnimationPlayer"
-	
+
+@onready var animPlayer:AnimationPlayer=$"proto1-candle7a/AnimationPlayer"	
+
+#flag
 var grounded = false
+var justLanded = false
+var injump = false
 
-var speedCap = 10
+#sensors
+@onready var groundSensor:RayCast3D = $groundSensor
+@onready var slopeClifSensor:RayCast3D = $slopeClifSensor
+@onready var frontSensor:RayCast3D = $frontSensor
 
-var justLanded=false
-var injump=false
-# Called when the node enters the scene tree for the first time.
 
-
+#charge collectible mode to item bag item
 var sparks =0
+
 func _ready():
 	c_acel=0
 	animPlayer.play("idle")
-#	print($RayCast.cast_to)
-#	cross_product($RayCast.cast_to,rotation)
-	pass # Replace with function body.
 
 func _input(event):
 	pass
@@ -70,24 +71,21 @@ func _physics_process(delta):
 	$Camera3D/Control/floorNormal.text = str("normal:",get_floor_normal())
 		
 	if(injump):
-		vel.y = jump_strenght
+		vel.y = jumpStrenght
 		snap_vector =Vector3.ZERO
 	elif justLanded:
 		snap_vector =Vector3.DOWN
-		
-		pass
-	var rcast =$RayCast3D.target_position
+	var rcast =$groundSensor.target_position
 
 	set_velocity(vel)
-	# TODOConverter3To4 looks that snap in Godot 4 is float, not vector like in Godot 3 - previous value `snap_vector`
+	# TODO
+	#Converter3To4 looks that snap in Godot 4 is float, 
+	#not vector like in Godot 3 - previous value `snap_vector`
 	set_up_direction(Vector3.UP)
 	set_floor_stop_on_slope_enabled(true)
 	set_max_slides(4)
 	set_floor_max_angle(deg_to_rad(45))
 	move_and_slide()
-#	used abs(c_acel) to consider negative values
-	
-#	rotation =  cross_product(get_floor_normal(),cross_product(rotation,rcast))
 	
 	if(not is_on_floor()):
 		animPlayer.play("on air")
@@ -105,7 +103,9 @@ func _physics_process(delta):
 func aling_with_floor():
 	
 	pass
-	
+
+
+#move to global???
 func cross_product(u=Vector3.UP,v=Vector3.UP):
 	var w = Vector3.ZERO
 	w.x = u.y*v.z-u.z*v.y
@@ -114,9 +114,8 @@ func cross_product(u=Vector3.UP,v=Vector3.UP):
 	print("u: ",u," v:",v)
 	print(w)
 	return  w
-#	print($RayCast.cast_to)
 	
-
+#move to bag??
 func pick_up(collectType="",points =1):
 	match collectType:
 		"spark":
@@ -138,40 +137,13 @@ func boost(dir = Vector3.ZERO):
 		print("boost")
 		$boostTime.start()
 		c_acel=100
+		
 #invert accel to cause a rebound effect		
 #bounce used to alter rebound speed
 func rebound(bounce=1):
 	if(c_acel>=0):
 		c_acel=-c_acel*bounce
-#func _physics_process(delta):
-#	var foward = Input.get_action_strength("ui_up")
-#	var hturn =Input.get_action_strength("ui_left")-Input.get_action_strength("ui_right")
-##
-#	$Camera/Control/Label.text=str("foward:",foward)
-#	if(foward>0):
-#		var dir = -get_transform().basis.z
-#		apply_impulse(Vector3.ZERO,Vector3(dir.x,0,dir.z))
-##		apply_impulse(Vector3.ZERO,dir)
-#
-#		$AnimationPlayer.play("sliding")
-#	else:
-#		$AnimationPlayer.play("idle")
-#	pass
-#	angular_velocity =Vector3(0,hturn,0)
-##	var ray = $RayCast.get
-#	if Input.is_action_just_pressed("ui_back"):
-#
-#		apply_impulse(Vector3.ZERO,Vector3.UP*10)
-#		pass
-#
-
-	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 
 func _on_boostTime_timeout():
 	$boostTime.stop()
-	pass # Replace with function body.
